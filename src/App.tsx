@@ -4,7 +4,7 @@ import PokemonCardForestTemplate from "./PokemonCardForestTemplate";
 
 function App() {
   const [region, setRegion] = useState("秋田市");
-  const [rate, setRate] = useState("45");
+  const [dangerLevel, setDangerLevel] = useState<"低" | "中" | "高">("低");
   const [features, setFeatures] = useState<string[]>([]);
   const [newFeature, setNewFeature] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -18,20 +18,13 @@ function App() {
     <div className="flex flex-col items-center gap-4 p-4">
       <h1 className="text-3xl font-bold text-green-600">秋田県 熊危険度カード</h1>
 
-      {/* 地域名・出没率 */}
+      {/* 地域名 */}
       <div className="flex gap-2">
         <input
           className="border p-1"
           placeholder="地域名"
           value={region}
           onChange={(e) => setRegion(e.target.value)}
-        />
-
-        <input
-          className="border p-1 w-20"
-          placeholder="出没率(%)"
-          value={rate}
-          onChange={(e) => setRate(e.target.value)}
         />
       </div>
 
@@ -79,9 +72,9 @@ function App() {
 
       {/* 危険度切替ボタン */}
       <div className="flex gap-2 mt-2">
-        <button className="px-3 bg-green-700 text-white" onClick={() => setBg(safeBg)}>安全</button>
-        <button className="px-3 bg-yellow-600 text-white" onClick={() => setBg(warnBg)}>注意</button>
-        <button className="px-3 bg-red-600 text-white" onClick={() => setBg(dangerBg)}>危険</button>
+        <button className="px-3 bg-green-700 text-white" onClick={() => { setBg(safeBg); setDangerLevel("低"); }}>安全</button>
+        <button className="px-3 bg-yellow-600 text-white" onClick={() => { setBg(warnBg); setDangerLevel("中"); }}>注意</button>
+        <button className="px-3 bg-red-600 text-white" onClick={() => { setBg(dangerBg); setDangerLevel("高"); }}>危険</button>
       </div>
 
       {/* 画像URL入力 */}
@@ -95,7 +88,7 @@ function App() {
       {/* カード表示 */}
       <PokemonCardForestTemplate
         region={region}
-        rate={rate}
+        dangerLevel={dangerLevel}
         bg={bg}
         features={features}
         imageUrl={imageUrl}

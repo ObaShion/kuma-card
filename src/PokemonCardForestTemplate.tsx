@@ -1,6 +1,6 @@
 type CardProps = {
   region: string;
-  rate: string;
+  dangerLevel: "低" | "中" | "高";
   bg: string;
   features: string[];
   imageUrl: string | null;
@@ -9,7 +9,7 @@ type CardProps = {
 
 export default function PokemonCardForestTemplate({
   region,
-  rate,
+  dangerLevel,
   bg,
   features,
   imageUrl,
@@ -25,14 +25,19 @@ export default function PokemonCardForestTemplate({
           backgroundImage: `url('${bg}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          filter: "brightness(0.6)",
         }}
       />
 
       {/* header */}
       <div className="relative z-10 flex justify-between items-center p-4 text-yellow-200 text-xl font-bold">
         <span>{region}</span>
-        <span>{rate}%</span>
+        <span className={
+          dangerLevel === "低" ? "text-green-400" :
+          dangerLevel === "中" ? "text-yellow-400" :
+          "text-red-400"
+        }>
+          {dangerLevel}
+        </span>
       </div>
 
       {/* 編集画像 */}
