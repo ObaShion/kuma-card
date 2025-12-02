@@ -99,6 +99,7 @@ function App() {
         bg={bg}
         features={features}
         imageUrl={imageUrl}
+        removeFeature={(index) => setFeatures(features.filter((_, i) => i !== index))}
       />
     </div>
   );
