@@ -2,3 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Force all text to black (override component classes) */
+html, body, #root, #root * {
+  color: #000 !important;
+}
+
+/* Footer text inside the card should be white even with the global override */
+#bear-card .footer-white {
+  color: #fff !important;
+}
+
+/* Status color overrides to beat the global black !important */
+#bear-card .status-safe {
+  color: #bbf7d0 !important; /* green-200 */
+}
+#bear-card .status-warn {
+  color: #fef08a !important; /* yellow-200 */
+}
+#bear-card .status-danger {
+  color: #fecaca !important; /* red-200 */
+}
+
